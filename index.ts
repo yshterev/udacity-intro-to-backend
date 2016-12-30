@@ -2,6 +2,7 @@
 
 import * as Hapi from "hapi"
 import * as Inert from "inert"
+import * as Good from "good"
 
 const server: Hapi.Server = new Hapi.Server();
 server.connection({ port: 3000 });
@@ -21,11 +22,41 @@ server.register(Inert, (err) => {
     });
 });
 
-server.start((err) => {
+server.route({
+    method: 'GET',
+    path: '/{name}',
+    handler: function (request, reply) {
+        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+    }
+});
+
+server.register({
+    register: Good,
+    options: {
+        reporters: {
+            console: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{
+                    response: '*',
+                    log: '*'
+                }]
+            }, {
+                module: 'good-console'
+            }, 'stdout']
+        }
+    }
+}, (err) => {
 
     if (err) {
-        throw err;
+        throw err; // something bad happened loading the plugin
     }
 
-    console.log(`Server running at: ${server.info.uri}`);
+    server.start((err) => {
+
+        if (err) {
+            throw err;
+        }
+        server.log('info', 'Server running at: ' + server.info.uri);
+    });
 });
