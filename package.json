@@ -1,0 +1,27 @@
+{
+  "name": "udacity-intro-to-backend",
+  "version": "1.0.0",
+  "description": "Learning Backend Dev - Hapi.js + Typescript",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yshterev/udacity-intro-to-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yshterev/udacity-intro-to-backend/issues"
+  },
+  "homepage": "https://github.com/yshterev/udacity-intro-to-backend#readme",
+  "dependencies": {
+    "hapi": "^16.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "watch": "^1.0.1"
+  }
+}

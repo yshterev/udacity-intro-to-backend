@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "hapi": "registry:dt/hapi#13.0.0+20161121214052"
+  },
+  "globalDevDependencies": {
+    "node": "registry:dt/node#6.0.0+20161229171858"
+  }
+}
