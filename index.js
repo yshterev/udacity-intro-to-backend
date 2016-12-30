@@ -1,42 +1,65 @@
 'use strict';
 var Hapi = require("hapi");
-var Inert = require("inert");
 var Good = require("good");
+var Vision = require("vision");
+var Handlebars = require("handlebars");
+// create new server instance
 var server = new Hapi.Server();
-server.connection({ port: 3000 });
-server.register(Inert, function (err) {
+// setup host and port
+server.connection({
+    port: Number(process.argv[2] || 3000),
+    host: 'localhost'
+});
+// register vision to your server instance
+server.register(Vision, function (err) {
     if (err) {
         throw err;
     }
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-            reply.file('./index.html');
-        }
+    // configure template support
+    server.views({
+        engines: {
+            html: {
+                module: Handlebars,
+                isCached: false
+            }
+        },
+        isCached: false,
+        relativeTo: __dirname,
+        path: './views',
+        layout: true,
+        layoutPath: './views/layout',
+        partialsPath: './views/partials'
     });
 });
 server.route({
     method: 'GET',
-    path: '/{name}',
+    path: '/',
     handler: function (request, reply) {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+        var data = {
+            title: 'My homepage',
+            message: 'Hello from Future Studio'
+        };
+        reply.view('index', data);
     }
 });
 server.register({
     register: Good,
     options: {
         reporters: {
-            console: [{
+            console: [
+                {
                     module: 'good-squeeze',
                     name: 'Squeeze',
                     args: [{
                             response: '*',
                             log: '*'
                         }]
-                }, {
+                },
+                {
                     module: 'good-console'
-                }, 'stdout']
+                },
+                'stdout'
+            ]
         }
     }
 }, function (err) {
