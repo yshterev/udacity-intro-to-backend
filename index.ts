@@ -1,16 +1,24 @@
 'use strict';
 
 import * as Hapi from "hapi"
+import * as Inert from "inert"
 
 const server: Hapi.Server = new Hapi.Server();
 server.connection({ port: 3000 });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request: Hapi.Request, reply: Hapi.IReply) => {
-        reply('hello world!');
+server.register(Inert, (err) => {
+
+    if (err) {
+        throw err;
     }
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+            reply.file('./index.html');
+        }
+    });
 });
 
 server.start((err) => {

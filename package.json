@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/yshterev/udacity-intro-to-backend#readme",
   "dependencies": {
-    "hapi": "^16.0.2"
+    "hapi": "^16.0.2",
+    "inert": "^4.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
