@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js 80",
-    "watch": "tsc -w"
+    "watch": "tsc -w --listFiles"
   },
   "repository": {
     "type": "git",

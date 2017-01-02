@@ -1,9 +1,14 @@
 {
-  "files": [
-    "index.ts"
-  ],
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": false
+  },
   "exclude": [
     "node_modules",
-    "typings"
+    "typings",
+    "server"
   ]
 }
