@@ -1,5 +1,6 @@
 {
   "watch": [
+    "index.js",
     "views/**/*"
   ],
   "ext": "js json html"

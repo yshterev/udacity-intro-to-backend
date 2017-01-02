@@ -4,7 +4,8 @@
   "description": "Learning Backend Dev - Hapi.js + Typescript",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon index.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js 80",
     "watch": "tsc -w"
   },
   "repository": {
