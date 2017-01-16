@@ -51,7 +51,10 @@ exports.Routes = [{
         method: 'POST',
         path: '/unit2/signup-form',
         handler: function (request, reply) {
-            reply.view('welcome');
+            var data = {
+                username: request.payload.username
+            };
+            reply.view('welcome', data);
         },
         config: {
             validate: {
@@ -60,33 +63,37 @@ exports.Routes = [{
                     var message = error.output.payload.message.match(/\[(.*?)\]/)[1];
                     var data = {};
                     message = message.replace(/"/g, '');
-                    console.log(message, keys);
-                    console.log(request.payload);
+                    data = {
+                        username: request.payload.username,
+                        email: request.payload.email
+                    };
                     keys.map(function (key) {
                         switch (key) {
                             case 'username':
-                                data = {
-                                    error_username: message
-                                };
+                                data.error_username = message;
                                 break;
                             case 'password':
-                                data = {
-                                    error_password: message
-                                };
+                                var passRegex = new RegExp(/with value\s\S+/, 'g');
+                                if (passRegex.test(message)) {
+                                    message = "Password contains invalid characters";
+                                }
+                                data.error_password = message;
                                 break;
                             case 'verify':
-                                data = {
-                                    error_verify: message
-                                };
+                                message = "Your passwords do not match";
+                                data.error_verify = message;
+                                break;
+                            case 'email':
+                                data.error_email = message;
                                 break;
                         }
                     });
                     reply.view('signup-form', data);
                 },
                 payload: {
-                    username: Joi.string().min(3).max(10),
-                    password: Joi.string(),
-                    verify: Joi.string(),
+                    username: Joi.string().required().min(3).max(10),
+                    password: Joi.string().required().min(5).regex(/^[a-zA-Z0-9_-]{3,30}$/),
+                    verify: Joi.ref('password'),
                     email: Joi.string().email()
                 }
             }
