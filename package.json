@@ -2,10 +2,10 @@
   "name": "udacity-intro-to-backend",
   "version": "1.0.0",
   "description": "Learning Backend Dev - Hapi.js + Typescript",
-  "main": "index.js",
+  "main": "dist/server/index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js 80",
+    "start": "node dist/server/index.js",
+    "start:dev": "nodemon dist/server/index.js 8000",
     "watch": "tsc -w --listFiles"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "handlebars": "^4.0.6",
     "hapi": "^16.0.2",
     "inert": "^4.1.0",
+    "joi": "^10.1.0",
     "vision": "^4.1.1"
   },
   "devDependencies": {

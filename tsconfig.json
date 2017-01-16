@@ -4,11 +4,11 @@
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "outDir": "dist/server"
   },
   "exclude": [
     "node_modules",
-    "typings",
-    "server"
+    "typings"
   ]
 }

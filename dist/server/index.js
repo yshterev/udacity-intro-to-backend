@@ -3,12 +3,13 @@ var Hapi = require("hapi");
 var Good = require("good");
 var Vision = require("vision");
 var Handlebars = require("handlebars");
-var routes_1 = require("./server/routes");
+var routes_1 = require("./routes");
 var server = new Hapi.Server();
 server.connection({
     port: Number(process.argv[2] || 3000),
-    host: '192.168.1.102'
+    host: 'localhost'
 });
+console.log(__dirname);
 server.register(Vision, function (err) {
     if (err) {
         throw err;
@@ -17,15 +18,15 @@ server.register(Vision, function (err) {
         engines: {
             html: {
                 module: Handlebars,
-                isCached: false
+                isCached: true
             }
         },
         isCached: false,
         relativeTo: __dirname,
-        path: './views/pages',
+        path: '../../views/pages',
         layout: true,
-        layoutPath: './views/layout',
-        partialsPath: './views/partials'
+        layoutPath: '../../views/layout',
+        partialsPath: '../../views/partials'
     });
 });
 server.route(routes_1.Routes);
@@ -57,6 +58,6 @@ server.register({
         if (err) {
             throw err;
         }
-        server.log('info', 'Server running at: ' + server.info.uri);
+        server.log('info', 'Server running at11: ' + server.info.uri);
     });
 });

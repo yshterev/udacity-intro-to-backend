@@ -9,7 +9,7 @@ import * as Good from "good";
 import * as Vision from "vision";
 import * as Handlebars from "handlebars";
 
-import {Routes} from "./server/routes";
+import {Routes} from "./routes";
 
 // create new server instance
 const server: Hapi.Server = new Hapi.Server();
@@ -17,8 +17,10 @@ const server: Hapi.Server = new Hapi.Server();
 // setup host and port
 server.connection({
   port: Number(process.argv[2] || 3000),
-  host: '192.168.1.102'
+  host: 'localhost'
 });
+
+console.log(__dirname);
 
 // register vision to your server instance
 server.register(Vision, function (err) {
@@ -31,15 +33,15 @@ server.register(Vision, function (err) {
     engines: {
       html: {
         module: Handlebars,
-        isCached: false
+        isCached: true
       }
     },
     isCached: false,
     relativeTo: __dirname,
-    path: './views/pages',
+    path: '../../views/pages',
     layout: true,
-    layoutPath: './views/layout',
-    partialsPath: './views/partials',
+    layoutPath: '../../views/layout',
+    partialsPath: '../../views/partials',
     // helpersPath: './views/helpers'
   })
 });
@@ -77,6 +79,6 @@ server.register({
     if (err) {
       throw err;
     }
-    server.log('info', 'Server running at: ' + server.info.uri);
+    server.log('info', 'Server running at11: ' + server.info.uri);
   });
 });

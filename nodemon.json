@@ -1,8 +1,7 @@
 {
   "watch": [
-    "index.js",
     "views/**/*",
-    "server/**/*.js"
+    "dist/**/*.js"
   ],
   "ext": "js json html"
 }
