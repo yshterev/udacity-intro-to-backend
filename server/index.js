@@ -1,26 +1,25 @@
-'use strict';
+import Hapi from "hapi";
+import Inert from "inert";
+import Good from "good";
+import Vision from "vision";
+import Handlebars from "handlebars";
 
-declare var __dirname: any;
-declare var process: any;
+import {Routes} from "./routes/index";
 
-import * as Hapi from "hapi";
-import * as Inert from "inert";
-import * as Good from "good";
-import * as Vision from "vision";
-import * as Handlebars from "handlebars";
+const server = new Hapi.Server();
 
-import {Routes} from "./routes";
-
-// create new server instance
-const server: Hapi.Server = new Hapi.Server();
-
-// setup host and port
 server.connection({
   port: Number(process.argv[2] || 3000),
   host: 'localhost'
 });
 
-console.log(__dirname);
+server.route({
+    method: 'GET',
+    path: '/hello',
+    handler: ( request, reply ) => {
+        reply( 'Hello World!' );
+    }
+});
 
 // register vision to your server instance
 server.register(Vision, function (err) {
@@ -38,11 +37,10 @@ server.register(Vision, function (err) {
     },
     isCached: false,
     relativeTo: __dirname,
-    path: '../../views/pages',
+    path: '../views/pages',
     layout: true,
-    layoutPath: '../../views/layout',
-    partialsPath: '../../views/partials',
-    // helpersPath: './views/helpers'
+    layoutPath: '../views/layout',
+    partialsPath: '../views/partials'
   })
 });
 
@@ -79,6 +77,6 @@ server.register({
     if (err) {
       throw err;
     }
-    server.log('info', 'Server running at11: ' + server.info.uri);
+    server.log('info', 'Server running at: ' + server.info.uri);
   });
 });

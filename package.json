@@ -1,12 +1,10 @@
 {
   "name": "udacity-intro-to-backend",
   "version": "1.0.0",
-  "description": "Learning Backend Dev - Hapi.js + Typescript",
+  "description": "Learning Backend Dev - Hapi.js + ES6",
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "node dist/server/index.js",
-    "start:dev": "nodemon dist/server/index.js 8000",
-    "watch": "tsc -w --listFiles"
+    "start": "nodemon bootstrap.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +21,14 @@
     "good-console": "^6.2.0",
     "good-squeeze": "^5.0.1",
     "handlebars": "^4.0.6",
-    "hapi": "^16.0.2",
+    "hapi": "^16.1.1",
     "inert": "^4.1.0",
     "joi": "^10.1.0",
     "vision": "^4.1.1"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
     "nodemon": "^1.11.0",
     "npm-run-all": "^3.1.2",
     "watch": "^1.0.1"

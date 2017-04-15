@@ -2,10 +2,10 @@ import * as Hapi from "hapi";
 import * as Joi from "joi";
 import * as Boom from "boom";
 
-export const Routes: any[] = [{
+export const Routes = [{
   method: 'GET',
   path: '/',
-  handler: function (request: Hapi.Request, reply: Hapi.IReply) {
+  handler: function (request, reply) {
     const name = request.params.name ? encodeURIComponent(request.params.name) : 'Stranger';
     const data = {
       title: 'My homepage',
@@ -17,7 +17,7 @@ export const Routes: any[] = [{
 }, {
   method: 'GET',
   path: '/unit2/rot13',
-  handler: function (request: Hapi.Request, reply: Hapi.IReply) {
+  handler: function (request, reply) {
     const name = request.params.name ? encodeURIComponent(request.params.name) : 'Stranger';
     const data = {
       title: 'My homepage',
@@ -29,7 +29,7 @@ export const Routes: any[] = [{
 }, {
   method: 'POST',
   path: '/unit2/rot13',
-  handler: function (request: Hapi.Request, reply: Hapi.IReply) {
+  handler: function (request, reply) {
     let text = request.payload.text;
 
     // ROT13 encrypt
@@ -47,7 +47,7 @@ export const Routes: any[] = [{
 }, {
   method: 'GET',
   path: '/unit2/signup-form',
-  handler: function (request: Hapi.Request, reply: Hapi.IReply) {
+  handler: function (request, reply) {
     const name = request.params.name ? encodeURIComponent(request.params.name) : 'Stranger';
     const data = {
       title: 'My homepage',
@@ -59,8 +59,8 @@ export const Routes: any[] = [{
 }, {
   method: 'POST',
   path: '/unit2/signup-form',
-  handler: function (request: Hapi.Request, reply: Hapi.IReply) {
-    const data: Object = {
+  handler: function (request, reply) {
+    const data = {
       username: request.payload.username,
     };
 
@@ -69,9 +69,9 @@ export const Routes: any[] = [{
   config: {
     validate: {
       failAction: (request, reply, source, error) => {
-        const keys: Array<string> = error.output.payload.validation.keys;
-        let message: string = error.output.payload.message.match(/\[(.*?)\]/)[1];
-        let data: Object = {};
+        const keys = error.output.payload.validation.keys;
+        let message = error.output.payload.message.match(/\[(.*?)\]/)[1];
+        let data = {};
 
         message = message.replace(/"/g, '');
 
